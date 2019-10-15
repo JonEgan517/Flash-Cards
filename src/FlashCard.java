@@ -9,19 +9,23 @@ public class FlashCard
 		setAnswer(a);
 	}
 
-	public String getQuestion() {
+	public String getQuestion() 
+	{
 		return question;
 	}
 
-	public void setQuestion(String question) {
+	public void setQuestion(String question) 
+	{
 		this.question = question;
 	}
 
-	public String getAnswer() {
+	public String getAnswer() 
+	{
 		return answer;
 	}
 
-	public void setAnswer(String answer) {
+	public void setAnswer(String answer) 
+	{
 		this.answer = answer;
 	}
 }
