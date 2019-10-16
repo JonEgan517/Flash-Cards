@@ -8,24 +8,60 @@ public class ChoosingQuestion
 	public static void choosing(ArrayList <FlashCard> trivia, ArrayList <FlashCard> math)
 	{
 		Scanner intInput = new Scanner(System.in);
-
-		System.out.println("What flahscards do you want to study first?\n1. Trivia\n2. Math");
-		int chooseQuestions = intInput.nextInt();
-		Random rand = new Random();
+		Scanner stringInput = new Scanner(System.in);
 		
-		for(FlashCard triviaQuestion : trivia)
-		{
-			if(chooseQuestions == 1)
-			{	 
-		        System.out.println(trivia.get(rand.nextInt(trivia.size()))); 
+		System.out.println("What flahscards do you want to study first?\n1. Trivia\n2. Math\n");
+		
+		int chooseQuestions = intInput.nextInt();
+		int questionNumber = (int)(Math.random()*3);
+		boolean stillGuessing = true;
+		String answer;
+		int counterCorrect = 0;
+		int counterWrong = 0;
+		
+		if(chooseQuestions == 1)
+		{	 
+			System.out.println(trivia.get(questionNumber).getQuestion());
+			while(stillGuessing = true)
+			{
+				answer = stringInput.nextLine();			
+				
+				if(answer.equals(trivia.get(questionNumber).getAnswer()))
+				{
+					counterCorrect = counterCorrect + 1;
+					System.out.println("Number got correct: " + counterCorrect + "\n"); 
+					trivia.remove(questionNumber);	
+					System.out.println("That is correct. Here is a new question\n" + trivia.get(questionNumber).getQuestion());
+				}
+				
+				else if(!answer.equals(trivia.get(questionNumber).getAnswer()) && counterWrong == 2)
+				{
+					System.out.println("Again, that is incorrect. The correct answer is: " + trivia.get(questionNumber).getAnswer() + ".\n");
+					trivia.remove(questionNumber); 
+					System.out.println("Here is a new question.\n" + trivia.get(questionNumber).getQuestion());
+				}
+
+				else
+				{
+					System.out.println("That is incorrect, try again.\n");
+					counterWrong = counterWrong + 1;
+				}
 			}
+			stillGuessing = false;
 		}
 		
-		for(FlashCard mathQuestion : math)
+		else if(chooseQuestions == 2)
 		{
-			if(chooseQuestions == 2)
+			System.out.println(math.get(questionNumber).getQuestion());
+			answer = stringInput.nextLine();			
+			
+			if(answer.equals(math.get(questionNumber).getAnswer()))
 			{
-				System.out.println(mathQuestion.getQuestion());
+				System.out.println("That is correct.");
+			}
+			else
+			{
+				System.out.println("That is incorrect. The correct answer is: " + math.get(questionNumber).getAnswer() + ".\n");
 			}
 		}
 	}
