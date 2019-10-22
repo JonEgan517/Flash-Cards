@@ -17,25 +17,26 @@ public class ChoosingQuestion
 		int questionNumber = rand.nextInt(trivia.size());
 		String answer;
 		int counterCorrect = 0;
-		int counterWrong = 0;
+		int counterWrong = 1;
 		
 		
 		if(chooseQuestions == 1)
 		{	 
 			System.out.println(trivia.get(questionNumber).getQuestion());
-			for (int i = trivia.size() -1; i >= 0; i--)
+			for (int i = trivia.size(); i > 0; i--)
 			{
+				
 				answer = stringInput.nextLine();			
 				
 				if(answer.equals(trivia.get(questionNumber).getAnswer()))
 				{
 					counterCorrect = counterCorrect + 1;
-					System.out.println("Number got correct: " + counterCorrect + "\n"); 
-					trivia.remove(questionNumber);	
+					System.out.println("Number got correct: " + counterCorrect + "\n"); 	
+					trivia.remove(questionNumber);
 					
 					if(trivia.isEmpty() == true)
-					{
-						System.out.println("You have answered all questions.");
+					{	
+						System.out.println("You have answered all of the questions.");
 					}
 					
 					else
@@ -46,29 +47,33 @@ public class ChoosingQuestion
 		
 				else
 				{
-					if(counterWrong < 2)
+					if(counterWrong < 3)
 					{
 						System.out.println("That is incorrect, try again.\n");
 						counterWrong = counterWrong + 1;
 					}
 					
 					else
-					{
-						trivia.remove(questionNumber); 
+					{ 	
 						
 						if(trivia.isEmpty() == true)
 						{
-							System.out.println("You have answered all questions.");
+							trivia.remove(questionNumber);
+							System.out.println("You have answered all of the questions.");
 						}
 						
 						else
 						{
-							System.out.println("Again, that is incorrect. The correct answer is: " + trivia.get(questionNumber).getAnswer() + ".\n"
-							+ "Here is a new question.\n" + trivia.get(questionNumber).getQuestion());
+							System.out.println("Again, that is incorrect. The correct answer is: " 
+							+ trivia.get(questionNumber).getAnswer()+ ".\n");
+							trivia.remove(questionNumber);
+							System.out.println("Here is a new question.\n" + trivia.get(questionNumber).getQuestion());
+							
 						}	
 					}
 				}
-			}	 
+				questionNumber = rand.nextInt(trivia.size());
+			}
 		}
 		
 		else if(chooseQuestions == 2)
