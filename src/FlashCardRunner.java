@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class FlashCardRunner 
 {
@@ -13,7 +14,12 @@ public class FlashCardRunner
 		math.add(new FlashCard("What is 12 * 12?", "144"));
 		math.add(new FlashCard("What is 2 + 2?", "4"));
 		math.add(new FlashCard("What is 24 / 2?", "12"));
+		
+		Random rand = new Random();
+		int questionNumber = rand.nextInt(trivia.size());
+		
 
-		ChoosingQuestion.choosing(trivia,math);
+		ChoosingQuestion.pickRandom(questionNumber);
+		ChoosingQuestion.choosing(trivia,math,questionNumber);
 	}
 }

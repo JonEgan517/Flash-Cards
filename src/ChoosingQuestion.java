@@ -5,16 +5,15 @@ import java.util.Random;
 
 public class ChoosingQuestion 
 {
-	public static void choosing(ArrayList <FlashCard> trivia, ArrayList <FlashCard> math)
+	public static void choosing(ArrayList <FlashCard> trivia, ArrayList <FlashCard> math, int questionNumber)
 	{
 		Scanner intInput = new Scanner(System.in);
 		Scanner stringInput = new Scanner(System.in);
 		
+		
 		System.out.println("What flahscards do you want to study first?\n1. Trivia\n2. Math\n");
 		
-		Random rand = new Random();
 		int chooseQuestions = intInput.nextInt();
-		int questionNumber = rand.nextInt(trivia.size());
 		String answer;
 		int counterCorrect = 0;
 		int counterWrong = 1;
@@ -72,7 +71,6 @@ public class ChoosingQuestion
 						}	
 					}
 				}
-				questionNumber = rand.nextInt(trivia.size());
 			}
 		}
 		
@@ -90,5 +88,19 @@ public class ChoosingQuestion
 				System.out.println("That is incorrect. The correct answer is: " + math.get(questionNumber).getAnswer() + ".\n");
 			}
 		}
+	}
+
+	public static void pickRandom(int questionNumber, ArrayList <FlashCard> trivia, ArrayList <FlashCard> math) 
+	{
+		if(questionNumber >= trivia.size())
+		{
+			pickRandom();
+		}
+		
+	}
+
+	public static int pickRandom() 
+	{
+		return (0);  	
 	}
 }
