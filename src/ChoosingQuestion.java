@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Random;
 
 
 public class ChoosingQuestion 
@@ -14,6 +12,7 @@ public class ChoosingQuestion
 		
 		
 		System.out.println("What flahscards do you want to study first?\n1. Trivia\n2. Math\n");
+		
 		questionNumber = pickRandom();
 		int chooseQuestions = intInput.nextInt();
 		String answer;
@@ -25,7 +24,7 @@ public class ChoosingQuestion
 		{	 
 			System.out.println(FlashCardRunner.trivia.get(questionNumber).getQuestion());
 			
-			for (int i = FlashCardRunner.trivia.size(); i > 0; i--)
+			while(FlashCardRunner.trivia.size()>0)
 			{
 				
 				answer = stringInput.nextLine();			
@@ -67,11 +66,12 @@ public class ChoosingQuestion
 						
 						else
 						{
-							System.out.println("Again, that is incorrect. The correct answer is: " 
+							System.out.println("Again, that is incorrect. The correct answer is: "
 							+ FlashCardRunner.trivia.get(questionNumber).getAnswer()+ ".\n");
 							FlashCardRunner.trivia.remove(questionNumber);
+							pickRandom();
+							counterWrong--;
 							System.out.println("Here is a new question.\n" + FlashCardRunner.trivia.get(questionNumber).getQuestion());
-							
 						}	
 					}
 				}
