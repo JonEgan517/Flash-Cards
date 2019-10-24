@@ -17,7 +17,7 @@ public class ChoosingQuestion
 		int chooseQuestions = intInput.nextInt();
 		String answer;
 		int counterCorrect = 0;
-		int counterWrong = 1;
+		int counterWrong = 0;
 		
 		
 		if(chooseQuestions == 1)
@@ -49,7 +49,7 @@ public class ChoosingQuestion
 		
 				else
 				{
-					if(counterWrong < 3)
+					if(counterWrong < 2)
 					{
 						System.out.println("That is incorrect, try again.\n");
 						counterWrong = counterWrong + 1;
@@ -70,7 +70,7 @@ public class ChoosingQuestion
 							+ FlashCardRunner.trivia.get(questionNumber).getAnswer()+ ".\n");
 							FlashCardRunner.trivia.remove(questionNumber);
 							pickRandom();
-							counterWrong--;
+							counterWrong = 0;
 							System.out.println("Here is a new question.\n" + FlashCardRunner.trivia.get(questionNumber).getQuestion());
 						}	
 					}
@@ -81,15 +81,58 @@ public class ChoosingQuestion
 		else if(chooseQuestions == 2)
 		{
 			System.out.println(FlashCardRunner.math.get(questionNumber).getQuestion());
-			answer = stringInput.nextLine();			
 			
-			if(answer.equals(FlashCardRunner.math.get(questionNumber).getAnswer()))
+			while(FlashCardRunner.math.size()>0)
 			{
-				System.out.println("That is correct.");
-			}
-			else
-			{
-				System.out.println("That is incorrect. The correct answer is: " + FlashCardRunner.math.get(questionNumber).getAnswer() + ".\n");
+				
+				answer = stringInput.nextLine();			
+				
+				if(answer.equals(FlashCardRunner.math.get(questionNumber).getAnswer()))
+				{
+					counterCorrect = counterCorrect + 1;
+					System.out.println("Number got correct: " + counterCorrect + "\n"); 	
+					FlashCardRunner.math.remove(questionNumber);
+					
+					if(FlashCardRunner.math.isEmpty() == true)
+					{	
+						System.out.println("You have answered all of the questions.");
+					}
+					
+					else
+					{
+						pickRandom();
+						System.out.println("That is correct. Here is a new question\n" + FlashCardRunner.math.get(questionNumber).getQuestion());
+					}	
+				}
+		
+				else
+				{
+					if(counterWrong < 2)
+					{
+						System.out.println("That is incorrect, try again.\n");
+						counterWrong = counterWrong + 1;
+					}
+					
+					else
+					{ 	
+						
+						if(FlashCardRunner.math.isEmpty() == true)
+						{
+							FlashCardRunner.math.remove(questionNumber);
+							System.out.println("You have answered all of the questions.");
+						}
+						
+						else
+						{
+							System.out.println("Again, that is incorrect. The correct answer is: "
+							+ FlashCardRunner.math.get(questionNumber).getAnswer()+ ".\n");
+							FlashCardRunner.math.remove(questionNumber);
+							pickRandom();
+							counterWrong = 0;
+							System.out.println("Here is a new question.\n" + FlashCardRunner.math.get(questionNumber).getQuestion());
+						}	
+					}
+				}
 			}
 		}
 	}
@@ -97,10 +140,12 @@ public class ChoosingQuestion
 	public static int pickRandom() 
 	{
 		questionNumber = (int)(Math.random()*(FlashCardRunner.trivia.size()));
+		
 		if(questionNumber >= FlashCardRunner.trivia.size())
 		{
 			pickRandom();
 		}
+		
 		return (questionNumber);
 	}
 }
