@@ -124,6 +124,48 @@ public class ChoosingQuestion
 		}
 	}
 	
+	public static void addQuestionTrivia() 
+	{
+		Scanner intInput = new Scanner (System.in);
+		System.out.println("How many questions are you going to add to trivia?\n");
+		int numberOfQuestions = intInput.nextInt();
+		
+		for (int i = 0; i < numberOfQuestions; i++) 
+		{
+			Scanner stringInput = new Scanner(System.in);
+			
+			System.out.println("Please enter a trvia question.\n");
+            String addingQuestion = (stringInput.nextLine());
+
+            System.out.println("Please enter the answer.\n");
+            String addingAnswer = (stringInput.nextLine());
+            
+            FlashCardRunner.trivia.add(new FlashCard(addingQuestion, addingAnswer));
+        }
+		
+		
+	}
+	
+	public static void addQuestionMath() 
+	{
+		Scanner intInput = new Scanner (System.in);
+		System.out.println("How many questions are you going to add to math?\n");
+		int numberOfQuestions = intInput.nextInt();
+		
+		for (int i = 0; i < numberOfQuestions; i++) 
+		{
+			Scanner stringInput = new Scanner(System.in);
+			
+			System.out.println("Please enter a math question.\n");
+            String addingQuestion = (stringInput.nextLine());
+
+            System.out.println("Please enter the answer.\n");
+            String addingAnswer = (stringInput.nextLine());
+            
+            FlashCardRunner.math.add(new FlashCard(addingQuestion, addingAnswer));
+        }
+	}
+	
 	public static int pickRandomTrivia() 
 	{
 		questionNumber = (int)(Math.random()*(FlashCardRunner.trivia.size()));

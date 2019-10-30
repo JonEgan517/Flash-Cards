@@ -13,20 +13,50 @@ public class FlashCardRunner
 		MathData.mathData();
 		
 		Scanner intInput = new Scanner(System.in);
-		System.out.println("What flahscards do you want to study first?\n1. Trivia\n2. Math\n");
-		int chooseQuestions = intInput.nextInt();
+		Scanner stringInput = new Scanner (System.in);
+		int chooseQuestions = 0;
+		String wouldYouLikeToAddQuestion;
 		
+		
+		System.out.println("What flahscards do you want to study first?\n1. Trivia\n2. Math\n");
+		chooseQuestions = intInput.nextInt();
 		
 		if(chooseQuestions == 1)
 		{
-			ChoosingQuestion.pickRandomTrivia();
-			ChoosingQuestion.choosingTrivia();
+			System.out.println("Would you like to add a question to trivia? Enter Yes or No.\n");
+			wouldYouLikeToAddQuestion= stringInput.nextLine();
+			
+			if(wouldYouLikeToAddQuestion.equals("Yes") || wouldYouLikeToAddQuestion.equals("yes"))
+			{
+				ChoosingQuestion.addQuestionTrivia();
+				ChoosingQuestion.pickRandomTrivia();
+				ChoosingQuestion.choosingTrivia();
+			}
+			
+			else if(wouldYouLikeToAddQuestion.equals("No") || wouldYouLikeToAddQuestion.equals("no"))
+			{
+				ChoosingQuestion.pickRandomTrivia();
+				ChoosingQuestion.choosingTrivia();
+			}
 		}
 		
 		else if(chooseQuestions == 2)
 		{
-			ChoosingQuestion.pickRandomMath();
-			ChoosingQuestion.choosingMath();
+			System.out.println("Would you like to add a question to trivia? Enter Yes or No.\n");
+			wouldYouLikeToAddQuestion= stringInput.nextLine();
+			
+			if(wouldYouLikeToAddQuestion.equals("Yes") || wouldYouLikeToAddQuestion.equals("yes"))
+			{	
+				ChoosingQuestion.addQuestionMath();
+				ChoosingQuestion.pickRandomMath();
+				ChoosingQuestion.choosingMath();
+			}
+			
+			else if(wouldYouLikeToAddQuestion.equals("No") || wouldYouLikeToAddQuestion.equals("no"))
+			{
+				ChoosingQuestion.pickRandomMath();
+				ChoosingQuestion.choosingMath();
+			}
 		}
 	}
 }
